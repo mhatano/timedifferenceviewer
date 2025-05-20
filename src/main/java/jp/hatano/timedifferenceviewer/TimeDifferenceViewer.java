@@ -26,6 +26,7 @@ public class TimeDifferenceViewer extends javax.swing.JFrame {
      * Creates new form TimeDifferenceViewer
      */
     public TimeDifferenceViewer() {
+        this.setTitle("Time Difference Viewer");
         initComponents();
         addTimer();
     }
