@@ -68,11 +68,11 @@ public class TimeDifferenceViewer extends javax.swing.JFrame {
         jLabel2.setText("Indian Standard Time : ");
 
         jCurrentTimeJST.setBackground(new java.awt.Color(255, 255, 255));
-        jCurrentTimeJST.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
+        jCurrentTimeJST.setFont(new java.awt.Font("Cascadia Mono", 1, 36)); // NOI18N
         jCurrentTimeJST.setText("00:00:00");
 
         jCurrentTimeIST.setBackground(new java.awt.Color(255, 255, 255));
-        jCurrentTimeIST.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
+        jCurrentTimeIST.setFont(new java.awt.Font("Cascadia Mono", 1, 36)); // NOI18N
         jCurrentTimeIST.setText("00:00:00");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -112,11 +112,11 @@ public class TimeDifferenceViewer extends javax.swing.JFrame {
 
         jLabel5.setText("Japan Standard Time :");
 
-        jTextFieldJST.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jTextFieldJST.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
 
         jLabel6.setText("Indian Standard Time :");
 
-        jTextFieldIST.setFont(new java.awt.Font("Consolas", 0, 24)); // NOI18N
+        jTextFieldIST.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
 
         jButtonConvertJST2IST.setFont(new java.awt.Font("メイリオ", 0, 24)); // NOI18N
         jButtonConvertJST2IST.setText("▼");
@@ -201,12 +201,30 @@ public class TimeDifferenceViewer extends javax.swing.JFrame {
 
     private void jButtonConvertJST2ISTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConvertJST2ISTActionPerformed
         String jst = jTextFieldJST.getText();
+        if( jst == null || jst.isEmpty() || !jst.matches("[0-9][0-9]*:[0-9][0-9]*") ) {
+            return;
+        }
+        int hPart = Integer.parseInt(jst.substring(0,jst.indexOf(":")));
+        int mPart = Integer.parseInt(jst.substring(jst.indexOf(":") + 1));
+        if ( hPart < 0 || hPart > 23 || mPart < 0 || mPart > 59 ) {
+            return;
+        }
+        jst = "%02d:%02d".formatted(hPart,mPart);
         String ist = getCorrespondingISTText(jst);
         jTextFieldIST.setText(ist);
     }//GEN-LAST:event_jButtonConvertJST2ISTActionPerformed
 
     private void jButtonConvertIST2JSTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConvertIST2JSTActionPerformed
         String ist = jTextFieldIST.getText();
+        if( ist == null || ist.isEmpty() || !ist.matches("[0-9][0-9]*:[0-9][0-9]*") ) {
+            return;
+        }
+        int hPart = Integer.parseInt(ist.substring(0,ist.indexOf(":")));
+        int mPart = Integer.parseInt(ist.substring(ist.indexOf(":") + 1));
+        if ( hPart < 0 || hPart > 23 || mPart < 0 || mPart > 59 ) {
+            return;
+        }
+        ist = "%02d:%02d".formatted(hPart,mPart);
         String jst = getCorrespondingJSTText(ist);
         jTextFieldJST.setText(jst);
     }//GEN-LAST:event_jButtonConvertIST2JSTActionPerformed
