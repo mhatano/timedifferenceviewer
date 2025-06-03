@@ -201,34 +201,37 @@ public class TimeDifferenceViewer extends javax.swing.JFrame {
 
     private void jButtonConvertJST2ISTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConvertJST2ISTActionPerformed
         String jst = jTextFieldJST.getText();
-        if( jst == null || jst.isEmpty() || !jst.matches("[0-9][0-9]*:[0-9][0-9]*") ) {
-            return;
+        TimeFormatValidity validity = isTimeFormatValid(jst);
+        if ( validity.isValid ) {
+            jTextFieldJST.setText(jst = "%02d:%02d".formatted(validity.hPart,validity.mPart));
+            String ist = getCorrespondingISTText(jst);
+            jTextFieldIST.setText(ist);
         }
-        int hPart = Integer.parseInt(jst.substring(0,jst.indexOf(":")));
-        int mPart = Integer.parseInt(jst.substring(jst.indexOf(":") + 1));
-        if ( hPart < 0 || hPart > 23 || mPart < 0 || mPart > 59 ) {
-            return;
-        }
-        jst = "%02d:%02d".formatted(hPart,mPart);
-        String ist = getCorrespondingISTText(jst);
-        jTextFieldIST.setText(ist);
     }//GEN-LAST:event_jButtonConvertJST2ISTActionPerformed
 
     private void jButtonConvertIST2JSTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConvertIST2JSTActionPerformed
         String ist = jTextFieldIST.getText();
-        if( ist == null || ist.isEmpty() || !ist.matches("[0-9][0-9]*:[0-9][0-9]*") ) {
-            return;
+        TimeFormatValidity validity = isTimeFormatValid(ist);
+        if ( validity.isValid ) {
+            jTextFieldIST.setText(ist = "%02d:%02d".formatted(validity.hPart,validity.mPart));
+            String jst = getCorrespondingJSTText(ist);
+            jTextFieldJST.setText(jst);
         }
-        int hPart = Integer.parseInt(ist.substring(0,ist.indexOf(":")));
-        int mPart = Integer.parseInt(ist.substring(ist.indexOf(":") + 1));
-        if ( hPart < 0 || hPart > 23 || mPart < 0 || mPart > 59 ) {
-            return;
-        }
-        ist = "%02d:%02d".formatted(hPart,mPart);
-        String jst = getCorrespondingJSTText(ist);
-        jTextFieldJST.setText(jst);
     }//GEN-LAST:event_jButtonConvertIST2JSTActionPerformed
 
+    private record TimeFormatValidity(boolean isValid,int hPart,int mPart) {}
+    
+    private TimeFormatValidity isTimeFormatValid(String timeString) {
+        if ( timeString == null || timeString.isEmpty() || !timeString.matches("[0-9][0-9]*:[0-9][0-9]*") ) {
+            return new TimeFormatValidity(false,-1,-1);
+        }
+        int hPart = Integer.parseInt(timeString.substring(0,timeString.indexOf(':')));
+        int mPart = Integer.parseInt(timeString.substring(timeString.indexOf(':') + 1));
+        if ( hPart < 0 || 23 < hPart || mPart < 0 || 59 < mPart ) {
+            return new TimeFormatValidity(false,-1,-1);
+        }
+        return new TimeFormatValidity(true,hPart,mPart);
+    }
     /**
      * @param args the command line arguments
      */
