@@ -62,8 +62,10 @@ public class TimeDifferenceViewer extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(300, 100));
         jPanel1.setPreferredSize(new java.awt.Dimension(620, 200));
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Japan Standard Time :");
 
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Indian Standard Time : ");
 
         jCurrentTimeJST.setBackground(new java.awt.Color(255, 255, 255));
@@ -108,10 +110,12 @@ public class TimeDifferenceViewer extends javax.swing.JFrame {
         jPanel2.setMinimumSize(new java.awt.Dimension(300, 100));
         jPanel2.setPreferredSize(new java.awt.Dimension(620, 200));
 
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Japan Standard Time :");
 
         jTextFieldJST.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
 
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Indian Standard Time :");
 
         jTextFieldIST.setFont(new java.awt.Font("Cascadia Mono", 0, 14)); // NOI18N
