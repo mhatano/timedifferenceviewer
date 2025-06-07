@@ -208,6 +208,8 @@ public class TimeDifferenceViewer extends javax.swing.JFrame {
             jTextFieldJST.setText(jst = "%02d:%02d".formatted(validity.hPart,validity.mPart));
             String ist = getCorrespondingISTText(jst);
             jTextFieldIST.setText(ist);
+        } else {
+            jTextFieldIST.setText("");
         }
     }//GEN-LAST:event_jButtonConvertJST2ISTActionPerformed
 
@@ -218,6 +220,8 @@ public class TimeDifferenceViewer extends javax.swing.JFrame {
             jTextFieldIST.setText(ist = "%02d:%02d".formatted(validity.hPart,validity.mPart));
             String jst = getCorrespondingJSTText(ist);
             jTextFieldJST.setText(jst);
+        } else {
+            jTextFieldJST.setText("");
         }
     }//GEN-LAST:event_jButtonConvertIST2JSTActionPerformed
 
